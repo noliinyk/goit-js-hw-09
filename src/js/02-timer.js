@@ -26,10 +26,15 @@ function startTimer() {
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = selectedDates - currentTime;
-      const time = convertMs(deltaTime);
-
-      updateClockFace(time);
-    }, 1000);
+      if (deltaTime >= 0) {
+        const time = convertMs(deltaTime);
+        updateClockFace(time);
+      }
+      else {
+        clearInterval(intervalId);
+        btnStart.setAttribute(`disabled`, false);
+        } 
+      }, 1000);
 
 };
 
